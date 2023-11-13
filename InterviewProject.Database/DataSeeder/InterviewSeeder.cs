@@ -16,11 +16,15 @@ namespace InterviewProject.Database.DataSeeder
                 {
                     yield return new Interview
                     {
-                        Id = id++,
-                        Name = $"Interview_{id}",
+                        Id = id,
+                        Name = $"Interview_{id++}",
                         IntervieweeId = intervieweeId,
                         InterviewerId = interviewerId
                     };
+
+                    // из-за того, что id инкрементировался на 19-й строке
+                    // Name был некорректным
+                    // После этого фикса 12 из 16-ти тестов GetInterviewsTest стали отрабатыть положительно
                 }
             }
         }

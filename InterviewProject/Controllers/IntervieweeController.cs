@@ -50,5 +50,10 @@ namespace InterviewProject.Controllers
             _service.DeleteInterviewee(id);
             return Ok();
         }
+
+        // т.к. в DeleteInterviewee происходит исключение
+        // retutn Ok(); не отрабатывает
+        // в обратную сторону по конвейеру передедаётся исключение NotFoundException
+        // несмотря на это в результате получаем код ответа 200
     }
 }

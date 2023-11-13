@@ -44,7 +44,7 @@ namespace InterviewProject.Tests.Integration
         [Test]
         [TestCase(1, "Васильев", "Василий")]
         [TestCase(2, "Сидоров", "Сидор")]
-        [TestCase(3, "James", "Bond")]
+        [TestCase(3, "Bond", "James")]
         [TestCase(4, "Watson", "Doctor")]
         public async Task GetIntervieweesTest(
             int id,
@@ -54,10 +54,14 @@ namespace InterviewProject.Tests.Integration
             var json = await _client.GetAsync("api/interviewees");
             var interviewees = await json.Content.ReadFromJsonAsync<IEnumerable<GetIntervieweeDto>>();
 
-            Assert.That(interviewees.Any(x => x.Id == id 
-                                    && x.FirstName == firstName
-                                    && x.LastName == lastName), 
-                        Is.True);
+            // все данные в interviewees заполняются корректно
+            // однако TestCase-3 выполняется неудачно
+            // т.к. в TestCase-3 имя и фамилия перепутаны местами
+            // James это имя, Bond - фамилия, а не наоборот
+
+            Assert.That(interviewees.Any(x => x.Id == id && 
+                                              x.FirstName == firstName && 
+                                              x.LastName == lastName), Is.True);
         }
 
         [Test]

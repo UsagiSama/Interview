@@ -23,6 +23,10 @@ namespace InterviewProject.Middlewares
             }
             catch (Exception e)
             {
+                // теперь этот участок кода стал достижим
+                // после фикса ошибки с передачей исключения в обратную сторону по конвейру
+                // все тесты из InterviewerTests и большая часть тестов IntervieweeTests стали выполнятся положительно
+
                 //Отлавливаем исключение и выставляем корректный код ответа
                 context.Response.StatusCode = e switch
                 {

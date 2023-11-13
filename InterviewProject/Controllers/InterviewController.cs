@@ -39,6 +39,9 @@ namespace InterviewProject.Controllers
         [HttpPut]
         public ActionResult UpdateInterview([FromBody]UpdateInterviewDto request)
         {
+            // информация поля Id не передаётся по сети
+            // что доказывает отсутствие поля Id в схеме PUT /api/interviews из Swagger 
+
             interviewService.UpdateInterview(request);
             return Ok();
         }

@@ -22,10 +22,19 @@ namespace InterviewProject.Middlewares
                 await _next.Invoke(context);
                 //Регистрируем успешный запрос
                 metrics.IncreaseRequestCount(true);
-            } catch
+            } 
+            catch
             {
+                // из endpoint-а DeleteInterviewee отлавливаем исключение
+                // до исправлений здесь распространение исключений из endpoint-ов заканчивалось
+
                 //Регистрируем запрос, вызвавший исключение
                 metrics.IncreaseRequestCount(false);
+
+                // т.к. в конвейере существует специальный middleware для маппинга классов исключений с кодами ошибок,
+                // который находится выше по конвееру
+                // распростроняем исключение в обратную сторону по конвейеру
+                throw;
             }
         }
     }

@@ -88,6 +88,7 @@ namespace InterviewProject.Services.Services
             int id,
             CancellationToken token = default)
         {
+            // здесь всё логично т.к. в конвейере есть специальный middleware для маппинга классов исключений с кодами ошибок
             var interviewee = _context.Interviewees
                 .FirstOrDefault(x => x.Id == id)
                 ?? throw new NotFoundException();
